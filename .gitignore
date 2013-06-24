@@ -1,3 +1,6 @@
 // Idea generated files
 *.iml
 .idea/
+
+gen/
+build/
