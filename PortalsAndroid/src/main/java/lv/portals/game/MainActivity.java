@@ -1,9 +1,5 @@
 package lv.portals.game;
 
-import android.app.Activity;
-import android.os.Bundle;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 import org.anddev.andengine.engine.Engine;
 import org.anddev.andengine.engine.camera.Camera;
 import org.anddev.andengine.engine.options.EngineOptions;
@@ -15,23 +11,13 @@ import org.anddev.andengine.ui.activity.BaseGameActivity;
 
 public class MainActivity extends BaseGameActivity {
 
-// ===========================================================
-// Constants
-// ===========================================================
-
     private static final int CAMERA_WIDTH = 720;
     private static final int CAMERA_HEIGHT = 480;
 
-// ===========================================================
-// Fields
-// ===========================================================
-
-    private Camera mCamera;
-
     @Override
     public Engine onLoadEngine() {
-        this.mCamera = new Camera(0, 0, CAMERA_WIDTH, CAMERA_HEIGHT);
-        return new Engine(new EngineOptions(true, EngineOptions.ScreenOrientation.LANDSCAPE, new RatioResolutionPolicy(CAMERA_WIDTH, CAMERA_HEIGHT), this.mCamera));
+        Camera mCamera = new Camera(0, 0, CAMERA_WIDTH, CAMERA_HEIGHT);
+        return new Engine(new EngineOptions(true, EngineOptions.ScreenOrientation.LANDSCAPE, new RatioResolutionPolicy(CAMERA_WIDTH, CAMERA_HEIGHT), mCamera));
     }
 
     @Override
@@ -53,12 +39,4 @@ public class MainActivity extends BaseGameActivity {
     public void onLoadComplete() {
 
     }
-
-// ===========================================================
-// Methods
-// ===========================================================
-
-// ===========================================================
-// Inner and Anonymous Classes
-// ===========================================================
 }
