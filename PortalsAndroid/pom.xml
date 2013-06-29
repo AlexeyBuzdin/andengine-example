@@ -98,7 +98,7 @@
 
         <!--Dependencies for AndEngine-->
         <dependency>
-            <groupId>com.anddev</groupId>
+            <groupId>org</groupId>
             <artifactId>andengine</artifactId>
             <version>gles2</version>
             <scope>compile</scope>

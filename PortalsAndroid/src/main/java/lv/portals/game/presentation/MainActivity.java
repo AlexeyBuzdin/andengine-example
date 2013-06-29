@@ -1,49 +1,66 @@
 package lv.portals.game.presentation;
 
 import lv.portals.game.R;
-import org.anddev.andengine.engine.Engine;
-import org.anddev.andengine.engine.camera.Camera;
-import org.anddev.andengine.engine.options.EngineOptions;
-import org.anddev.andengine.engine.options.WakeLockOptions;
-import org.anddev.andengine.engine.options.resolutionpolicy.RatioResolutionPolicy;
-import org.anddev.andengine.entity.scene.Scene;
-import org.anddev.andengine.entity.scene.background.ColorBackground;
-import org.anddev.andengine.ui.activity.BaseGameActivity;
+import org.andengine.engine.camera.Camera;
+import org.andengine.engine.options.EngineOptions;
+import org.andengine.engine.options.ScreenOrientation;
+import org.andengine.engine.options.resolutionpolicy.RatioResolutionPolicy;
+import org.andengine.entity.scene.Scene;
+import org.andengine.entity.sprite.Sprite;
+import org.andengine.opengl.texture.ITexture;
+import org.andengine.opengl.texture.bitmap.BitmapTexture;
+import org.andengine.opengl.texture.region.TextureRegion;
+import org.andengine.opengl.texture.region.TextureRegionFactory;
+import org.andengine.ui.activity.SimpleBaseGameActivity;
+import org.andengine.util.adt.io.in.IInputStreamOpener;
+import org.andengine.util.debug.Debug;
 
-public class MainActivity extends BaseGameActivity {
+import java.io.IOException;
+import java.io.InputStream;
 
-    private static final int WIDTH = 720;
+public class MainActivity extends SimpleBaseGameActivity {
+
+    private static final int WIDTH = 800;
     private static final int HEIGHT = 480;
-
-    private Scene scene;
+    private TextureRegion mBackgroundTextureRegion;
 
     @Override
-    public Engine onLoadEngine() {
-        Camera camera = new Camera(0, 0, WIDTH, HEIGHT);
-
-        EngineOptions engineOptions = new EngineOptions(true, EngineOptions.ScreenOrientation.LANDSCAPE, new RatioResolutionPolicy(WIDTH, HEIGHT), camera);
-        engineOptions.setWakeLockOptions(WakeLockOptions.SCREEN_ON);
-
-        return new Engine(engineOptions);
+    public EngineOptions onCreateEngineOptions() {
+        final Camera camera = new Camera(0, 0, WIDTH, HEIGHT);
+        return new EngineOptions(true, ScreenOrientation.LANDSCAPE_FIXED, new RatioResolutionPolicy(WIDTH, HEIGHT), camera);
     }
 
     @Override
-    public void onLoadResources() {
+    protected void onCreateResources() {
+        try {
+            // 1 - Set up bitmap textures
+            ITexture backgroundTexture = new BitmapTexture(this.getTextureManager(), new IInputStreamOpener() {
+                @Override
+                public InputStream open() throws IOException {
+                    return getAssets().open("gfx/background.png");
+                }
+            });
 
+            // 2 - Load bitmap textures into VRAM
+            backgroundTexture.load();
+            // 3 - Set up texture regions
+            this.mBackgroundTextureRegion = TextureRegionFactory.extractFromTexture(backgroundTexture);
+        } catch (IOException e) {
+            Debug.e(e);
+        }
     }
 
     @Override
-    public Scene onLoadScene() {
-        scene = new Scene();
-        scene.setBackground(new ColorBackground(0.05804f, 0.1274f, 0.3784f));
+    protected Scene onCreateScene() {
+        // 1 - Create new scene
+        final Scene scene = new Scene();
+        Sprite backgroundSprite = new Sprite(0, 0, this.mBackgroundTextureRegion, getVertexBufferObjectManager());
+        scene.attachChild(backgroundSprite);
 
+        scene.setTouchAreaBindingOnActionDownEnabled(true);
         return scene;
     }
 
-    @Override
-    public void onLoadComplete() {
-
-    }
 
     public int get1(){
         return 1;
