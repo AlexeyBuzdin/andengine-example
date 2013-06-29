@@ -10,7 +10,7 @@
 
     <application
             android:allowBackup="true"
-            android:label="APP">
+            android:label="@string/app_name">
         <activity
                 android:name=".MainActivity">
             <intent-filter>
