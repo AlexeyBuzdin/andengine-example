@@ -1,6 +1,5 @@
 package lv.portals.game.presentation;
 
-import lv.portals.game.R;
 import org.andengine.engine.camera.Camera;
 import org.andengine.engine.options.EngineOptions;
 import org.andengine.engine.options.ScreenOrientation;
@@ -61,12 +60,4 @@ public class MainActivity extends SimpleBaseGameActivity {
         return scene;
     }
 
-
-    public int get1(){
-        return 1;
-    }
-
-    public String getAppName() {
-        return getResources().getString(R.string.app_name);
-    }
 }
