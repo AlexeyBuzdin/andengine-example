@@ -19,9 +19,15 @@ public class MainActivityTest {
     }
 
     @Test
-    public void shouldHaveAnAppName() throws Exception {
+    public void get1ShouldReturn1() throws Exception {
 
         int actual = activity.get1();
         assertThat(actual, is(1));
+    }
+
+    @Test
+    public void getAppNameShouldReturnPortals() throws Exception {
+        String actual = activity.getAppName();
+        assertThat(actual, is("Portals"));
     }
 }

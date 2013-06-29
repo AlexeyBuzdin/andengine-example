@@ -43,4 +43,8 @@ public class MainActivity extends BaseGameActivity {
     public int get1(){
         return 1;
     }
+
+    public String getAppName() {
+        return getResources().getString(R.string.app_name);
+    }
 }
