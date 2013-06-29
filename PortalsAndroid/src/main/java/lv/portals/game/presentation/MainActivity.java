@@ -1,5 +1,6 @@
-package lv.portals.game;
+package lv.portals.game.presentation;
 
+import lv.portals.game.R;
 import org.anddev.andengine.engine.Engine;
 import org.anddev.andengine.engine.camera.Camera;
 import org.anddev.andengine.engine.options.EngineOptions;
@@ -33,8 +34,6 @@ public class MainActivity extends BaseGameActivity {
 
     @Override
     public Scene onLoadScene() {
-//        this.mEngine.registerUpdateHandler(new FPSLogger());
-
         scene = new Scene();
         scene.setBackground(new ColorBackground(0.05804f, 0.1274f, 0.3784f));
 

@@ -1,4 +1,4 @@
-package lv.portals.game;
+package lv.portals.game.presentation;
 
 import com.xtremelabs.robolectric.RobolectricTestRunner;
 import org.junit.Before;
