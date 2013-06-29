@@ -1,6 +1,6 @@
 ###Portals
 
-####Instalation
+####Installation
 1. Download android sdk 15 through Android SDK Manager
 2. Set ANDROID_HOME
 3. Download [maven android sdk deployer](https://github.com/mosabua/maven-android-sdk-deployer/#readme)
