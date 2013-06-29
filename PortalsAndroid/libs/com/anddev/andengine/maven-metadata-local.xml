@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata>
+  <groupId>com.anddev</groupId>
+  <artifactId>andengine</artifactId>
+  <versioning>
+    <release>gles2</release>
+    <versions>
+      <version>gles2</version>
+    </versions>
+    <lastUpdated>20130629111348</lastUpdated>
+  </versioning>
+</metadata>
