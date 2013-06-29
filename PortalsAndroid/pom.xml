@@ -24,15 +24,34 @@
     </repositories>
 
     <dependencies>
-    
         <!--!!! Attention !!!-->
-        <!--Should be commented if Robolectric is used
-            See more info at Robolectric dependency-->
+        <!--Robolectric requires com.google.android.maps to work without warnings
+            It is lacking from MavenRepos, so You will have to use local repo
+            To put Android SDK into local repository use Maven Android SDK Deployer
+            https://github.com/mosabua/maven-android-sdk-deployer/#readme
+            After putting Android SDK into local repository,comment com.google.android and
+            uncomment android and com.google.android.maps dependencies -->
+        <!---->
+
+        <dependency>
+            <groupId>com.google.android</groupId>
+            <artifactId>android</artifactId>
+            <version>4.1.1.4</version>
+            <scope>provided</scope>
+        </dependency>
+
         <!--<dependency>-->
-            <!--<groupId>com.google.android</groupId>-->
-            <!--<artifactId>android</artifactId>-->
-            <!--<version>4.1.1.4</version>-->
-            <!--<scope>provided</scope>-->
+        <!--<groupId>android</groupId>-->
+        <!--<artifactId>android</artifactId>-->
+        <!--<version>4.0_r3</version>-->
+        <!--<scope>provided</scope>-->
+        <!--</dependency>-->
+
+        <!--<dependency>-->
+        <!--<groupId>com.google.android.maps</groupId>-->
+        <!--<artifactId>maps</artifactId>-->
+        <!--<version>4_r2</version>-->
+        <!--<scope>provided</scope>-->
         <!--</dependency>-->
 
         <!--Dependencies for Dagger-->
@@ -77,27 +96,6 @@
             <scope>test</scope>
         </dependency>
 
-        <!--!!! Attention !!!-->
-        <!--Robolectric requires com.google.android.maps to work without warnings
-            It is lacking from MavenRepos, so You will have to use local repo
-            To put Android SDK into local repository use Maven Android SDK Deployer
-            https://github.com/mosabua/maven-android-sdk-deployer/#readme
-            if Robolectric isn't required comment following dependencies and uncomment com.google.android-->
-        
-        <dependency>
-            <groupId>android</groupId>
-            <artifactId>android</artifactId>
-            <version>4.0_r3</version>
-            <scope>provided</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>com.google.android.maps</groupId>
-            <artifactId>maps</artifactId>
-            <version>4_r2</version>
-            <scope>provided</scope>
-        </dependency>
-
         <!--Dependencies for AndEngine-->
         <dependency>
             <groupId>com.anddev</groupId>
@@ -110,26 +108,17 @@
         <finalName>${project.artifactId}</finalName>
         <sourceDirectory>src/main/java</sourceDirectory>
         <testSourceDirectory>src/test/java</testSourceDirectory>
-        <pluginManagement>
-            <plugins>
-                <plugin>
-                    <groupId>com.jayway.maven.plugins.android.generation2</groupId>
-                    <artifactId>android-maven-plugin</artifactId>
-                    <version>3.6.0</version>
-                    <extensions>true</extensions>
-                </plugin>
-            </plugins>
-        </pluginManagement>
         <plugins>
             <plugin>
                 <groupId>com.jayway.maven.plugins.android.generation2</groupId>
                 <artifactId>android-maven-plugin</artifactId>
+                <version>3.6.0</version>
                 <configuration>
                     <sdk>
-                        <!-- platform or api level (api level 4 = platform 1.6) -->
-                        <platform>14</platform>
+                        <platform>15</platform>
                     </sdk>
                 </configuration>
+                <extensions>true</extensions>
             </plugin>
         </plugins>
     </build>
