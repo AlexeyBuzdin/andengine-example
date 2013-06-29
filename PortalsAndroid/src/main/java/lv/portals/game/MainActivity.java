@@ -39,4 +39,8 @@ public class MainActivity extends BaseGameActivity {
     public void onLoadComplete() {
 
     }
+
+    public int get1(){
+        return 1;
+    }
 }
