@@ -6,6 +6,7 @@ import org.andengine.engine.options.ScreenOrientation;
 import org.andengine.engine.options.resolutionpolicy.RatioResolutionPolicy;
 import org.andengine.entity.scene.Scene;
 import org.andengine.entity.sprite.Sprite;
+import org.andengine.input.touch.TouchEvent;
 import org.andengine.opengl.texture.ITexture;
 import org.andengine.opengl.texture.bitmap.BitmapTexture;
 import org.andengine.opengl.texture.region.TextureRegion;
@@ -21,7 +22,9 @@ public class MainActivity extends SimpleBaseGameActivity {
 
     private static final int WIDTH = 800;
     private static final int HEIGHT = 480;
+
     private TextureRegion mBackgroundTextureRegion;
+    private TextureRegion mRing1;
 
     @Override
     public EngineOptions onCreateEngineOptions() {
@@ -40,10 +43,19 @@ public class MainActivity extends SimpleBaseGameActivity {
                 }
             });
 
+            ITexture ring1 = new BitmapTexture(this.getTextureManager(), new IInputStreamOpener() {
+                @Override
+                public InputStream open() throws IOException {
+                    return getAssets().open("gfx/ring1.png");
+                }
+            });
+
             // 2 - Load bitmap textures into VRAM
             backgroundTexture.load();
+            ring1.load();
             // 3 - Set up texture regions
             this.mBackgroundTextureRegion = TextureRegionFactory.extractFromTexture(backgroundTexture);
+            this.mRing1 = TextureRegionFactory.extractFromTexture(ring1);
         } catch (IOException e) {
             Debug.e(e);
         }
@@ -56,6 +68,20 @@ public class MainActivity extends SimpleBaseGameActivity {
         Sprite backgroundSprite = new Sprite(0, 0, this.mBackgroundTextureRegion, getVertexBufferObjectManager());
         scene.attachChild(backgroundSprite);
 
+
+
+        Sprite ring1 = new Sprite(139, 174, this.mRing1, getVertexBufferObjectManager()) {
+            @Override
+            public boolean onAreaTouched(TouchEvent pSceneTouchEvent, float pTouchAreaLocalX, float pTouchAreaLocalY) {
+
+                this.setPosition(pSceneTouchEvent.getX() - this.getWidth() / 2, pSceneTouchEvent.getY() - this.getHeight() / 2);
+
+                return true;
+            }
+        };
+
+        scene.attachChild(ring1);
+        scene.registerTouchArea(ring1);
         scene.setTouchAreaBindingOnActionDownEnabled(true);
         return scene;
     }

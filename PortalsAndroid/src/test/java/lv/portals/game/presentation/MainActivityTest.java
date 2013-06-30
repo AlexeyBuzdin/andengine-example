@@ -2,6 +2,7 @@ package lv.portals.game.presentation;
 
 import com.xtremelabs.robolectric.RobolectricTestRunner;
 import org.junit.Before;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 
 @RunWith(RobolectricTestRunner.class)
@@ -14,4 +15,9 @@ public class MainActivityTest {
         activity = new MainActivity();
     }
 
+    @Test
+    public void testName() throws Exception {
+
+
+    }
 }
